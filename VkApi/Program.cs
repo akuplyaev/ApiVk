@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VkApi
+namespace VkApplication
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace VkApi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ApiApplication());
+            Application.Run(new AuthForm());            
         }
     }
 }
