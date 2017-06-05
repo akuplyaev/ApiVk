@@ -31,7 +31,7 @@ namespace VkApi
                 Password = "serega94",
                 Settings = Settings.All
             });
-            var CurrentUser = vk.Users.Get(vk.UserId.Value, ProfileFields.All);
+            var CurrentUser = vk.Users.Get(137280448, ProfileFields.All);
             txtFirstName.Text = CurrentUser.FirstName;
             txtLastName.Text = CurrentUser.LastName;
         }
@@ -50,6 +50,20 @@ namespace VkApi
                 listFriends.Items.Add(friend.FirstName+" "+ friend.LastName);
             }
             
+        }
+
+        private void label3_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void btnSendMsg_Click(object sender, System.EventArgs e)
+        {
+            vk.Messages.Send(new MessagesSendParams
+            {
+                UserId = 137280448,
+                Message = txtMsg.Text
+            });
         }
     }
 }

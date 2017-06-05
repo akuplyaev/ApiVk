@@ -37,6 +37,9 @@ namespace VkApi
             this.label2 = new System.Windows.Forms.Label();
             this.listFriends = new System.Windows.Forms.ListBox();
             this.btnListFriends = new System.Windows.Forms.Button();
+            this.txtMsg = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnSendMsg = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtFirstName
@@ -74,14 +77,14 @@ namespace VkApi
             // listFriends
             // 
             this.listFriends.FormattingEnabled = true;
-            this.listFriends.Location = new System.Drawing.Point(354, 45);
+            this.listFriends.Location = new System.Drawing.Point(560, 12);
             this.listFriends.Name = "listFriends";
-            this.listFriends.Size = new System.Drawing.Size(271, 342);
+            this.listFriends.Size = new System.Drawing.Size(271, 212);
             this.listFriends.TabIndex = 4;
             // 
             // btnListFriends
             // 
-            this.btnListFriends.Location = new System.Drawing.Point(55, 217);
+            this.btnListFriends.Location = new System.Drawing.Point(620, 250);
             this.btnListFriends.Name = "btnListFriends";
             this.btnListFriends.Size = new System.Drawing.Size(140, 23);
             this.btnListFriends.TabIndex = 5;
@@ -89,11 +92,42 @@ namespace VkApi
             this.btnListFriends.UseVisualStyleBackColor = true;
             this.btnListFriends.Click += new System.EventHandler(this.btnListFriends_Click);
             // 
+            // txtMsg
+            // 
+            this.txtMsg.Location = new System.Drawing.Point(310, 55);
+            this.txtMsg.Multiline = true;
+            this.txtMsg.Name = "txtMsg";
+            this.txtMsg.Size = new System.Drawing.Size(189, 91);
+            this.txtMsg.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(310, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Введите сообщение";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // btnSendMsg
+            // 
+            this.btnSendMsg.Location = new System.Drawing.Point(331, 177);
+            this.btnSendMsg.Name = "btnSendMsg";
+            this.btnSendMsg.Size = new System.Drawing.Size(155, 23);
+            this.btnSendMsg.TabIndex = 8;
+            this.btnSendMsg.Text = "Отправить сообщение";
+            this.btnSendMsg.UseVisualStyleBackColor = true;
+            this.btnSendMsg.Click += new System.EventHandler(this.btnSendMsg_Click);
+            // 
             // ApiApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(858, 466);
+            this.Controls.Add(this.btnSendMsg);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtMsg);
             this.Controls.Add(this.btnListFriends);
             this.Controls.Add(this.listFriends);
             this.Controls.Add(this.label2);
@@ -117,6 +151,9 @@ namespace VkApi
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listFriends;
         private System.Windows.Forms.Button btnListFriends;
+        private System.Windows.Forms.TextBox txtMsg;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnSendMsg;
     }
 }
 
