@@ -12,8 +12,9 @@ namespace VkApi
 
     public partial class ApiApplication : Form
     {
-        private long _currentUserId = 0;
-        VkApi vk = new VkApi();        
+        long? currentUserId = 0;
+        long? selectedUserId = 0;
+        VkApi vk = new VkApi();
         public ApiApplication()
         {
             InitializeComponent();
@@ -31,14 +32,14 @@ namespace VkApi
                     Login = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\login.txt"),
                     Password = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\password.txt"),
                     Settings = Settings.All
-                });              
+                });
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Error");
             }
-            _currentUserId =long.Parse(vk.UserId.ToString());
-            var currentUser = vk.Users.Get(_currentUserId, ProfileFields.All);
+            currentUserId = vk.UserId;
+            var currentUser = vk.Users.Get((long)currentUserId, ProfileFields.All);
             txtFirstName.Text = currentUser.FirstName;
             txtLastName.Text = currentUser.LastName;
             GetFriends();
@@ -51,26 +52,31 @@ namespace VkApi
             {
                 UserId = 137280448,// UserId = _currentUserId
                 Fields = ProfileFields.LastName,
-                Order =  FriendsOrder.Name,
+                Order = FriendsOrder.Name,
             });
 
             foreach (var friend in friends)
             {
-                listFriends.Items.Add(friend.FirstName + " " + friend.LastName+" | "+friend.Id);
+                listFriends.Items.Add(friend.FirstName + " " + friend.LastName + " | " + friend.Id);
             }
         }
-        //Отправка сообщений
+        //Отправка сообщений выбранному пользователю
         private void btnSendMsg_Click(object sender, System.EventArgs e)
         {
             if (txtMsg.Text != "")
             {
                 vk.Messages.Send(new MessagesSendParams
                 {
-                    UserId = _currentUserId,
+                    UserId = selectedUserId,
                     Message = txtMsg.Text
-                });               
+                });
             }
             txtMsg.Text = "";
+        }
+        //Получение id выьранного пользователя в списке
+        private void listFriends_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            selectedUserId = long.Parse(listFriends.Text.Substring(listFriends.Text.LastIndexOf(" ")));            
         }
     }
 }

@@ -81,6 +81,7 @@ namespace VkApi
             this.listFriends.Name = "listFriends";
             this.listFriends.Size = new System.Drawing.Size(271, 212);
             this.listFriends.TabIndex = 4;
+            this.listFriends.SelectedIndexChanged += new System.EventHandler(this.listFriends_SelectedIndexChanged);
             // 
             // txtMsg
             // 
