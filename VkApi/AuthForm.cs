@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VkNet;
 using VkNet.Enums.Filters;
@@ -17,7 +10,8 @@ namespace VkApplication
 {
     
     public partial class AuthForm : Form
-    {        
+    {
+              
         public string Login
         {
             get { return txtLogin.Text; }
@@ -39,10 +33,15 @@ namespace VkApplication
                 Singlet.Api.Authorize(new ApiAuthParams
                 {
                     ApplicationId = 6061372,
-                    Login = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\login.txt"),//Login = Login,
-                    Password = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\password.txt"), //Password = Password,
+                    Login = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\login.txt"),
+                    //Login = Login,
+                    Password = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\password.txt"), 
+                    //Password = Password,
                     Settings = Settings.All
                 });
+                Singlet.UserId = Singlet.Api.UserId.Value;
+                Singlet.UserFirstName = Singlet.Api.Users.Get(Singlet.UserId, ProfileFields.All).FirstName;
+                Singlet.UserLastName = Singlet.Api.Users.Get(Singlet.UserId, ProfileFields.All).LastName;
                 Hide();
                 MainForm form = new MainForm();               
                 form.Show();
@@ -50,7 +49,7 @@ namespace VkApplication
             }
             catch
             {
-                MessageBox.Show("Неверный логин или пароль");
+                MessageBox.Show(@"Неверный логин или пароль");
             }
         }
 

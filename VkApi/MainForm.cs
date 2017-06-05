@@ -1,29 +1,25 @@
-﻿using System.IO;
-using VkNet;
-using VkNet.Enums.Filters;
+﻿using VkNet.Enums.Filters;
 using System.Windows.Forms;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.RequestParams;
-
+using System;
 namespace VkApplication
 {
 
     public partial class MainForm : Form
-    {       
-        long? currentUserId = 0;
-        long? selectedUserId = 0;
+    {        
+        public long SelectedUserID { get; set; }
         public MainForm()
         {
             InitializeComponent();
         }
         //Получение общей информации о пользователе
         private void Form1_Load(object sender, System.EventArgs e)
-        {           
-            currentUserId = Singlet.Api.UserId;            
-            var currentUser = Singlet.Api.Users.Get((long)currentUserId, ProfileFields.All);
-            txtFirstName.Text = currentUser.FirstName;
-            txtLastName.Text = currentUser.LastName;
+        {                                            
+            txtFirstName.Text = Singlet.UserFirstName;
+            txtLastName.Text = Singlet.UserLastName;
             GetFriends();
+          //  HistoryMessageBox.Items.Add(Singlet.Api.Messages.Get());
 
         }
         //Получение списка друзей
@@ -31,7 +27,7 @@ namespace VkApplication
         {
             var friends = Singlet.Api.Friends.Get(new FriendsGetParams
             {
-                UserId = 137280448,// UserId = _currentUserId
+                UserId = Singlet.UserId,
                 Fields = ProfileFields.LastName,
                 Order = FriendsOrder.Name,
             });
@@ -48,7 +44,7 @@ namespace VkApplication
             {
                Singlet.Api.Messages.Send(new MessagesSendParams
                 {
-                    UserId = selectedUserId,
+                    UserId = SelectedUserID,
                     Message = txtMsg.Text
                 });
             }
@@ -57,7 +53,22 @@ namespace VkApplication
         //Получение id выьранного пользователя в списке
         private void listFriends_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            selectedUserId = long.Parse(listFriends.Text.Substring(listFriends.Text.LastIndexOf(" ")));
+            SelectedUserID = long.Parse(listFriends.Text.Substring(listFriends.Text.LastIndexOf(" ")));
+            GetHistori();
+        }
+        //получение списка сообщений для выбранного пользователя
+        private void GetHistori()
+        {
+            HistoryMessageBox.Items.Clear();
+            var getHistory = Singlet.Api.Messages.GetHistory(new MessagesGetHistoryParams()
+            {
+                Count = 100,
+                UserId = SelectedUserID
+            });
+            foreach (var message in getHistory.Messages)
+            {
+                HistoryMessageBox.Items.Add(message.Body);
+            }
         }
 
         private void btnExit_Click(object sender, System.EventArgs e)
