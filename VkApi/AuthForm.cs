@@ -35,8 +35,8 @@ namespace VkApplication
                     ApplicationId = 6061372,
                     Login = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\login.txt"),
                     //Login = Login,
-                    Password = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\password.txt"), 
-                    //Password = Password,
+                   Password = File.ReadAllText(@"E:\MyProject\VkApi\VkApi\bin\Debug\password.txt"), 
+                   // Password = Password,
                     Settings = Settings.All
                 });
                 Singlet.UserId = Singlet.Api.UserId.Value;
