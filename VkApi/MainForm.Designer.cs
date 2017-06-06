@@ -33,7 +33,7 @@ namespace VkApplication
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.listFriends = new System.Windows.Forms.ListBox();
+            this.ListFriends = new System.Windows.Forms.ListBox();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSendMsg = new System.Windows.Forms.Button();
@@ -63,14 +63,14 @@ namespace VkApplication
             this.label2.TabIndex = 3;
             this.label2.Text = "Фамилия";
             // 
-            // listFriends
+            // ListFriends
             // 
-            this.listFriends.FormattingEnabled = true;
-            this.listFriends.Location = new System.Drawing.Point(24, 148);
-            this.listFriends.Name = "listFriends";
-            this.listFriends.Size = new System.Drawing.Size(200, 199);
-            this.listFriends.TabIndex = 4;
-            this.listFriends.SelectedIndexChanged += new System.EventHandler(this.listFriends_SelectedIndexChanged);
+            this.ListFriends.FormattingEnabled = true;
+            this.ListFriends.Location = new System.Drawing.Point(24, 148);
+            this.ListFriends.Name = "ListFriends";
+            this.ListFriends.Size = new System.Drawing.Size(200, 199);
+            this.ListFriends.TabIndex = 4;
+            this.ListFriends.SelectedIndexChanged += new System.EventHandler(this.listFriends_SelectedIndexChanged);
             // 
             // txtMsg
             // 
@@ -115,6 +115,7 @@ namespace VkApplication
             this.HistoryMessageBox.Name = "HistoryMessageBox";
             this.HistoryMessageBox.Size = new System.Drawing.Size(265, 199);
             this.HistoryMessageBox.TabIndex = 10;
+            this.HistoryMessageBox.SelectedIndexChanged += new System.EventHandler(this.HistoryMessageBox_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -167,7 +168,7 @@ namespace VkApplication
             this.Controls.Add(this.btnSendMsg);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMsg);
-            this.Controls.Add(this.listFriends);
+            this.Controls.Add(this.ListFriends);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -182,7 +183,7 @@ namespace VkApplication
         #endregion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listFriends;
+        private System.Windows.Forms.ListBox ListFriends;
         private System.Windows.Forms.TextBox txtMsg;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSendMsg;

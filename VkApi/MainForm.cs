@@ -3,18 +3,20 @@ using System.Windows.Forms;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Model.RequestParams;
 using System;
+using Application = System.Windows.Forms.Application;
+
 namespace VkApplication
 {
 
     public partial class MainForm : Form
     {        
-        public long SelectedUserID { get; set; }
+        public long SelectedUserId { get; set; }
         public MainForm()
-        {
+        {           
             InitializeComponent();
         }
         //Получение общей информации о пользователе
-        private void Form1_Load(object sender, System.EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {                                            
             lblFirstName.Text = Singlet.UserFirstName;
             lblLastName.Text = Singlet.UserLastName;
@@ -33,18 +35,18 @@ namespace VkApplication
 
             foreach (var friend in friends)
             {
-                listFriends.Items.Add(friend.FirstName + " " + friend.LastName + " | " + friend.Id);
+                ListFriends.Items.Add(friend.FirstName + " " + friend.LastName + " | " + friend.Id);
             }
-
+           
         }
-        //Получение истории сообщений пользователя
-        private void GetHistori()
+        //Получение истории сообщений пользователя     
+        private void GetHistori(long userId)
         {
             HistoryMessageBox.Items.Clear();
             var getHistory = Singlet.Api.Messages.GetHistory(new MessagesGetHistoryParams()
             {
                 Count = 100,
-                UserId = SelectedUserID
+                UserId = userId
             });
             foreach (var message in getHistory.Messages)
             {
@@ -59,11 +61,11 @@ namespace VkApplication
             {
                 Count = 30,
                 
-            });
+            });                        
             foreach (var dialog in getDialogs.Messages)
             {
                 
-                HistoryMessageBox.Items.Add(GetName(dialog.UserId.Value)+":"+dialog.Body);
+                    HistoryMessageBox.Items.Add(dialog.UserId +":"+ GetName(dialog.UserId.Value) + ":" + dialog.Body);                                                   
             }
         }
         //Функция получения имени и фамилии пользователя с определенным id
@@ -79,7 +81,7 @@ namespace VkApplication
             {
                Singlet.Api.Messages.Send(new MessagesSendParams
                 {
-                    UserId = SelectedUserID,
+                    UserId = SelectedUserId,
                     Message = txtMsg.Text
                 });
             }
@@ -88,8 +90,8 @@ namespace VkApplication
         //Получение id выьранного пользователя в списке
         private void listFriends_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            SelectedUserID = long.Parse(listFriends.Text.Substring(listFriends.Text.LastIndexOf(" ")));
-            GetHistori();
+            SelectedUserId = long.Parse(ListFriends.Text.Substring(ListFriends.Text.LastIndexOf(" ")));
+            GetHistori(SelectedUserId);
         }
         //получение списка сообщений для выбранного пользователя       
 
@@ -97,6 +99,12 @@ namespace VkApplication
         {
             Application.Exit();
 
+        }
+
+        private void HistoryMessageBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            long userId= long.Parse(HistoryMessageBox.Text.Substring(0,HistoryMessageBox.Text.IndexOf(":")));            
+            GetHistori(userId);
         }
     }
 }
