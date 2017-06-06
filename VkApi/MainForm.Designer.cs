@@ -43,6 +43,7 @@ namespace VkApplication
             this.btnExit = new System.Windows.Forms.Button();
             this.lblLastName = new System.Windows.Forms.Label();
             this.lblFirstName = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -154,11 +155,22 @@ namespace VkApplication
             this.lblFirstName.TabIndex = 14;
             this.lblFirstName.Text = "label";
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(28, 398);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(115, 23);
+            this.btnAdd.TabIndex = 15;
+            this.btnAdd.Text = "Добавить в БД";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(858, 466);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.btnExit);
@@ -171,7 +183,7 @@ namespace VkApplication
             this.Controls.Add(this.ListFriends);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.Text = "ApiApplication";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -193,6 +205,7 @@ namespace VkApplication
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.Label lblFirstName;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
 
