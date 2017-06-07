@@ -134,15 +134,10 @@ namespace VkApplication
             List<User> listUsers = GetFriendsList();
             using (var context = new UsersContext())
             {
-                foreach (var user in listUsers)
-                {
-                    context.Users.Add(user);
-                    
-                }
-                context.SaveChanges();
-
+                listUsers.ForEach(s => context.Users.Add(s));
+                context.SaveChanges();                
             }
-
+            MessageBox.Show(@"Complete");
         }
 
     }

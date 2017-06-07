@@ -2,12 +2,13 @@
 
 namespace VkApplication
 {
-    class UsersContext:DbContext
+    public class UsersContext : DbContext
     {
-        public UsersContext():base ("UsersContext")
+        public UsersContext() : base("UsersContext")
         {
-            
+
         }
         public DbSet<User> Users { get; set; }
     }
+
 }
